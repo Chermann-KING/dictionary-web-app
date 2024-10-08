@@ -1,10 +1,13 @@
 import React from "react";
+import { useSearch } from "@/context/SearchContext";
 
 interface AntonymsProps {
   antonyms: string[];
 }
 
 const Antonyms: React.FC<AntonymsProps> = ({ antonyms }) => {
+  const { setSearchTerm } = useSearch();
+
   if (!antonyms || antonyms.length === 0) return null;
 
   return (
@@ -13,7 +16,7 @@ const Antonyms: React.FC<AntonymsProps> = ({ antonyms }) => {
       <ul className="list-none flex flex-wrap gap-2 text-heading-s font-bold">
         {antonyms.map((antonym, index) => (
           <li key={index} className="text-accent-purple cursor-pointer">
-            <button>{antonym}</button>
+            <button onClick={() => setSearchTerm(antonym)}>{antonym}</button>
           </li>
         ))}
       </ul>
