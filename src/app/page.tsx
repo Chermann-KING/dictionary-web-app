@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import SearchBar from "@/components/SearchBar";
@@ -13,16 +12,23 @@ function Home() {
   const [searchResult, setSearchResult] = useState<SearchResult | null>(null);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const { searchTerm, setSearchTerm } = useSearch();
-  const [input, setInput] = useState<string>("");
 
   useEffect(() => {
-    if (searchTerm) {
+    if (searchTerm === "") {
+      // Réinitialiser les résultats de recherche si le champ est vide
+      setSearchResult(null);
+      setAudioUrl(null);
+    } else if (searchTerm) {
       handleSearch(searchTerm);
     }
   }, [searchTerm]);
 
   const handleSearch = async (word: string) => {
-    setInput(word);
+    if (!word.trim()) {
+      setSearchResult(null);
+      setAudioUrl(null);
+      return;
+    }
 
     try {
       const response = await fetch(
@@ -49,7 +55,7 @@ function Home() {
   return (
     <div className="flex flex-col gap-8 mx-auto py-10">
       <Header />
-      <SearchBar onSearch={setSearchTerm} initialInput={input} />
+      <SearchBar onSearch={setSearchTerm} initialInput={searchTerm || ""} />
       {searchResult && (
         <div>
           <Word

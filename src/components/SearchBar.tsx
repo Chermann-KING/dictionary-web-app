@@ -23,6 +23,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, initialInput }) => {
       onSearch(input);
     } else {
       setHasError(true);
+      onSearch("");
     }
   };
 
