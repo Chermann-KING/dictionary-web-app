@@ -52,7 +52,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, initialInput }) => {
             }
           }}
           placeholder="Search for any word…"
-          className={`bg-inherit block w-full rounded-2xl border-0 py-3.5 px-5 pr-12 text-dark-1 dark:text-light-4 ring-1 ring-inset outline-none placeholder:text-dark-3 placeholder:font-bold ${
+          className={`bg-inherit block w-full rounded-2xl border-0 py-3.5 px-5 pr-12 text-dark-1 dark:text-light-4 ring-1 ring-inset outline-none placeholder:text-dark-3 dark:placeholder:text-light-1 placeholder:font-bold ${
             hasError
               ? "ring-accent-red focus:ring-accent-red"
               : "ring-light-3 dark:ring-dark-2 focus:ring-accent-purple dark:focus:ring-accent-purple"

@@ -19,7 +19,7 @@ const FontSelector = (): JSX.Element => {
   const fonts: { label: string; value: FontOption }[] = [
     { label: "Sans Serif", value: "sans-serif" },
     { label: "Serif", value: "serif" },
-    { label: "Monospace", value: "monospace" },
+    { label: "Mono", value: "monospace" },
   ];
 
   /**
