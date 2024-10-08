@@ -36,10 +36,13 @@ const Word: React.FC<WordProps> = ({
       {audioUrl && (
         <button
           onClick={onPlayAudio}
-          className="rounded-full"
+          className="rounded-full hover:bg-accent-purple transition-colors duration-300"
           disabled={!audioUrl}
         >
-          <PlayIcon aria-hidden="true" />
+          <PlayIcon
+            className="text-accent-purple hover:text-white transition-colors duration-300"
+            aria-hidden="true"
+          />
         </button>
       )}
     </div>
