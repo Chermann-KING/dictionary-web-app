@@ -1,17 +1,29 @@
 "use client";
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import SearchBar from "@/components/SearchBar";
 import Word from "@/components/Word";
 import Meanings from "@/components/Meanings";
 import SourceLink from "@/components/SourceLink";
 import { Phonetic, SearchResult } from "../../types";
+import { SearchProvider, useSearch } from "@/context/SearchContext";
 
-export default function Home() {
+function Home() {
   const [searchResult, setSearchResult] = useState<SearchResult | null>(null);
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
+  const { searchTerm, setSearchTerm } = useSearch();
+  const [input, setInput] = useState<string>("");
+
+  useEffect(() => {
+    if (searchTerm) {
+      handleSearch(searchTerm);
+    }
+  }, [searchTerm]);
 
   const handleSearch = async (word: string) => {
+    setInput(word);
+
     try {
       const response = await fetch(
         `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
@@ -37,7 +49,7 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-8 mx-auto py-10">
       <Header />
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar onSearch={setSearchTerm} initialInput={input} />
       {searchResult && (
         <div>
           <Word
@@ -56,5 +68,13 @@ export default function Home() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <SearchProvider>
+      <Home />
+    </SearchProvider>
   );
 }

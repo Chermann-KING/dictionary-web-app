@@ -1,10 +1,13 @@
 import React from "react";
+import { useSearch } from "@/context/SearchContext";
 
 interface SynonymsProps {
   synonyms: string[];
 }
 
 const Synonyms: React.FC<SynonymsProps> = ({ synonyms }) => {
+  const { setSearchTerm } = useSearch();
+
   if (!synonyms || synonyms.length === 0) return null;
 
   return (
@@ -13,7 +16,7 @@ const Synonyms: React.FC<SynonymsProps> = ({ synonyms }) => {
       <ul className="list-none flex flex-wrap gap-2 text-heading-s font-bold">
         {synonyms.map((synonym, index) => (
           <li key={index} className="text-accent-purple cursor-pointer">
-            <button>{synonym}</button>
+            <button onClick={() => setSearchTerm(synonym)}>{synonym}</button>
           </li>
         ))}
       </ul>

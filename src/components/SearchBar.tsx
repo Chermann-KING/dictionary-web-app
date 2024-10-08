@@ -1,15 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SearchIcon from "@/images/icon-search.svg";
 
 interface SearchBarProps {
   onSearch: (word: string) => void;
+  initialInput: string;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
-  const [input, setInput] = useState("");
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch, initialInput }) => {
+  const [input, setInput] = useState(initialInput);
   const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setInput(initialInput);
+  }, [initialInput]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,7 +26,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
     }
   };
 
-  // Style du placeholder
   const placeholderStyle = {
     fontSize: "0.875rem",
     letterSpacing: "0px",
