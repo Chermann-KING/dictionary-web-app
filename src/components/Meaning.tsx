@@ -24,8 +24,8 @@ const Meaning: React.FC<Meaning> = ({
   <div className="mb-4">
     {/* Affichage du type de discours */}
     <div className="mt-5 flex items-center gap-4">
-      <h2 className="italic text-heading-m">{partOfSpeech}</h2>
-      <div className="mt-[5px] w-full h-[1px] bg-light-4 dark:bg-dark-3"></div>
+      <h2 className="text-heading-m italic font-bold">{partOfSpeech}</h2>
+      <div className="mt-[5px] w-full h-[1px] bg-light-2 dark:bg-dark-3" />
     </div>
 
     {/* Affichage des définitions */}
