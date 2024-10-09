@@ -10,7 +10,7 @@ const SearchContext = createContext<SearchContextType | undefined>(undefined);
 export const SearchProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("keyboard");
 
   return (
     <SearchContext.Provider value={{ searchTerm, setSearchTerm }}>

@@ -46,9 +46,17 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, initialInput }) => {
           type="text"
           value={input}
           onChange={(e) => {
-            setInput(e.target.value);
-            if (hasError && e.target.value.trim()) {
+            const value = e.target.value;
+            setInput(value);
+            if (!value.trim()) {
+              setHasError(true);
+            } else if (hasError) {
               setHasError(false);
+            }
+          }}
+          onBlur={() => {
+            if (!input.trim()) {
+              setHasError(true);
             }
           }}
           placeholder="Search for any word…"
