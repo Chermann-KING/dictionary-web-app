@@ -9,21 +9,23 @@ interface SourceLinkProps {
 
 const SourceLink: React.FC<SourceLinkProps> = ({ sourceUrls }) => {
   return (
-    <div className="mt-6 flex text-sm text-gray-600">
+    <div className="mt-6 flex text-body-s">
       <p className="underline mr-3 text-light-1">Source:</p>
-      {sourceUrls.map((url, index) => (
-        <div key={index} className="">
-          <Link
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mr-4 underline flex items-center text-dark-3 dark:text-light-4 gap-2"
-          >
-            {url}
-            <NewWindowIcon aria-hidden="true" />
-          </Link>
-        </div>
-      ))}
+      <div className="flex flex-wrap gap-1">
+        {sourceUrls.map((url, index) => (
+          <div key={index}>
+            <Link
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mr-4 underline flex items-center text-dark-3 dark:text-light-4 gap-2"
+            >
+              {url}
+              <NewWindowIcon aria-hidden="true" />
+            </Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

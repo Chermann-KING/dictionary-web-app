@@ -35,10 +35,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, initialInput }) => {
   };
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className="self-stretch flex flex-col gap-1  ">
       <form
         onSubmit={handleSearch}
-        className={`w-full relative flex items-center rounded-2xl bg-light-3 dark:bg-dark-2 ${
+        className={`relative flex items-center rounded-2xl bg-light-3 dark:bg-dark-2 ${
           hasError ? "ring-1 ring-inset ring-accent-red" : ""
         }`}
       >
@@ -52,7 +52,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, initialInput }) => {
             }
           }}
           placeholder="Search for any word…"
-          className={`bg-inherit block w-full rounded-2xl border-0 py-3.5 px-5 pr-12 text-dark-1 dark:text-light-4 ring-1 ring-inset outline-none placeholder:text-dark-3 dark:placeholder:text-light-1 placeholder:font-bold ${
+          className={`bg-inherit block w-full rounded-2xl border-0 py-3.5 px-5 pr-12 text-dark-1 dark:text-light-4 ring-1 ring-inset outline-none placeholder:text-dark-3 dark:placeholder:text-light-1 placeholder:font-bold caret-accent-purple ${
             hasError
               ? "ring-accent-red focus:ring-accent-red"
               : "ring-light-3 dark:ring-dark-2 focus:ring-accent-purple dark:focus:ring-accent-purple"

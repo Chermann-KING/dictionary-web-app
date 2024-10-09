@@ -32,7 +32,9 @@ export default function RootLayout({
       >
         <ThemeProvider enableSystem={true} attribute="class">
           <FontProvider>
-            <div className="w-[736px] pb-12 sm:pb-0">{children}</div>
+            <div className="w-[327px] sm:w-[689px] lg:w-[736px] mx-auto">
+              {children}
+            </div>
           </FontProvider>
         </ThemeProvider>
       </body>

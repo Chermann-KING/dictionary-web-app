@@ -20,11 +20,11 @@ const Word: React.FC<WordProps> = ({
   audioUrl,
 }) => {
   return (
-    <div className="mb-6 self-stretch flex justify-between items-center gap-2  ">
+    <div className="mb-6 self-stretch flex justify-between items-center gap-2">
       {/* word */}
       <div className="self-start flex flex-col">
         <h1 className="text-heading-l font-semibold">{word}</h1>
-        <div className="flex gap-1 text-heading-m text-accent-purple">
+        <div className="flex flex-wrap gap-1 text-heading-m text-accent-purple">
           {phonetics.map((phonetic, index) => (
             <span key={index} className="">
               {phonetic.text}
