@@ -67,32 +67,34 @@ function Home() {
   return (
     <div className="flex flex-col gap-8 mx-auto py-10">
       <Header />
-      <SearchBar onSearch={setSearchTerm} initialInput={searchTerm || ""} />
-      {notFound ? (
-        <NotFound
-          title={notFound.title}
-          message={notFound.message}
-          resolution={notFound.resolution}
-        />
-      ) : (
-        searchResult && (
-          <div>
-            <Word
-              word={searchResult.word}
-              phonetics={searchResult.phonetics}
-              onPlayAudio={playAudio}
-              audioUrl={audioUrl}
-            />
-            <Meanings meanings={searchResult.meanings} />
-            {searchResult.sourceUrls && (
-              <SourceLink
-                sourceUrls={searchResult.sourceUrls}
-                license={searchResult.license}
+      <main className="flex flex-col gap-8">
+        <SearchBar onSearch={setSearchTerm} initialInput={searchTerm || ""} />
+        {notFound ? (
+          <NotFound
+            title={notFound.title}
+            message={notFound.message}
+            resolution={notFound.resolution}
+          />
+        ) : (
+          searchResult && (
+            <div>
+              <Word
+                word={searchResult.word}
+                phonetics={searchResult.phonetics}
+                onPlayAudio={playAudio}
+                audioUrl={audioUrl}
               />
-            )}
-          </div>
-        )
-      )}
+              <Meanings meanings={searchResult.meanings} />
+              {searchResult.sourceUrls && (
+                <SourceLink
+                  sourceUrls={searchResult.sourceUrls}
+                  license={searchResult.license}
+                />
+              )}
+            </div>
+          )
+        )}
+      </main>
     </div>
   );
 }

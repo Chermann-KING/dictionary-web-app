@@ -61,6 +61,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, initialInput }) => {
         />
         <button
           type="submit"
+          aria-label="Search word definition"
           className="absolute right-5 flex items-center rounded-full"
         >
           <SearchIcon aria-hidden="true" />

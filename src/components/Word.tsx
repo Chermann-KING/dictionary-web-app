@@ -35,9 +35,11 @@ const Word: React.FC<WordProps> = ({
       {/* audio */}
       {audioUrl && (
         <button
+          type="button"
           onClick={onPlayAudio}
           className="rounded-full hover:bg-accent-purple transition-colors duration-300"
           disabled={!audioUrl}
+          aria-label="Play phonetic audio"
         >
           <PlayIcon
             className="text-accent-purple hover:text-white transition-colors duration-300"

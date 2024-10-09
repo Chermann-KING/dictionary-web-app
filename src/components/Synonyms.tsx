@@ -16,7 +16,13 @@ const Synonyms: React.FC<SynonymsProps> = ({ synonyms }) => {
       <ul className="list-none flex flex-wrap gap-2 text-heading-s font-bold">
         {synonyms.map((synonym, index) => (
           <li key={index} className="text-accent-purple cursor-pointer">
-            <button onClick={() => setSearchTerm(synonym)}>{synonym}</button>
+            <button
+              type="button"
+              aria-label="Search synonym definition"
+              onClick={() => setSearchTerm(synonym)}
+            >
+              {synonym}
+            </button>
           </li>
         ))}
       </ul>
