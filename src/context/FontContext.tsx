@@ -14,18 +14,27 @@ const monospace = localFont({
   src: "../app/fonts/inconsolata/Inconsolata-VariableFont_wdth,wght.ttf",
 });
 
-// Types des polices disponibles
+// Types des options de police disponibles
 export type FontOption = "sans-serif" | "serif" | "monospace";
 
-// Contexte de police
-const FontContext = createContext<{
+// Interface décrivant le contexte de police
+interface FontContextType {
   font: FontOption;
   setFont: (font: FontOption) => void;
-}>({
-  font: "sans-serif",
-  setFont: () => {},
-});
+}
 
+// Création du contexte de police
+const FontContext = createContext<FontContextType | undefined>(undefined);
+
+/**
+ * Fournisseur de contexte de police.
+ *
+ * Ce composant enveloppe l'application ou des composants spécifiques pour leur fournir
+ * l'accès à la police actuellement sélectionnée et une fonction pour la modifier.
+ *
+ * @param {React.ReactNode} children - Les composants enfants ayant besoin d'accéder au contexte.
+ * @returns {JSX.Element} Le fournisseur `FontProvider` encapsulant les composants enfants.
+ */
 export const FontProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
@@ -48,5 +57,19 @@ export const FontProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 };
 
-// Utilisation du Contexte
-export const useFont = () => useContext(FontContext);
+/**
+ * Hook personnalisé pour accéder au contexte de police.
+ *
+ * Permet aux composants enfants de récupérer et de modifier la police actuelle.
+ * Lance une erreur si utilisé en dehors d'un `FontProvider`.
+ *
+ * @throws {Error} Si le hook est utilisé en dehors de `FontProvider`.
+ * @returns {FontContextType} L'objet contenant la police actuelle et la fonction de mise à jour.
+ */
+export const useFont = (): FontContextType => {
+  const context = useContext(FontContext);
+  if (!context) {
+    throw new Error("useFont must be used within a FontProvider");
+  }
+  return context;
+};

@@ -3,19 +3,38 @@
 import { useState, useEffect } from "react";
 import SearchIcon from "@/images/icon-search.svg";
 
+/**
+ * Propriétés du composant `SearchBar`.
+ * @property {function} onSearch - Fonction à appeler lors d'une soumission de recherche.
+ * @property {string} initialInput - Texte initial du champ de recherche.
+ */
 interface SearchBarProps {
   onSearch: (word: string) => void;
   initialInput: string;
 }
 
+/**
+ * Composant `SearchBar` pour rechercher des mots.
+ * Ce composant inclut un champ de saisie de texte avec un bouton de soumission,
+ * permettant la recherche et le retour d'erreurs si le champ est vide.
+ *
+ * @param {SearchBarProps} props - Propriétés du composant `SearchBar`.
+ * @returns {JSX.Element} Un champ de recherche avec validation et affichage d'erreurs.
+ */
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch, initialInput }) => {
   const [input, setInput] = useState(initialInput);
   const [hasError, setHasError] = useState(false);
 
+  // Met à jour l'input initial si la prop initialInput change
   useEffect(() => {
     setInput(initialInput);
   }, [initialInput]);
 
+  /**
+   * Gère la soumission du formulaire.
+   * Affiche une erreur si le champ est vide, sinon appelle `onSearch`.
+   * @param {React.FormEvent} e - Événement de soumission du formulaire.
+   */
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (input.trim()) {
@@ -35,7 +54,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, initialInput }) => {
   };
 
   return (
-    <div className="self-stretch flex flex-col gap-1  ">
+    <div className="self-stretch flex flex-col gap-1">
       <form
         onSubmit={handleSearch}
         className={`relative flex items-center rounded-2xl bg-light-3 dark:bg-dark-2 ${

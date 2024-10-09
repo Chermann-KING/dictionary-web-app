@@ -9,13 +9,14 @@ import { FontOption, useFont } from "@/context/FontContext";
  * @returns {JSX.Element} Un dropdown avec des options de polices pour la sélection de style.
  */
 const FontSelector = (): JSX.Element => {
-  const { font, setFont } = useFont();
-  const [isOpen, setIsOpen] = useState(false);
-  const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null); // Référence pour la gestion des clics à l'extérieur du menu
-  const buttonRef = useRef<HTMLButtonElement>(null); // Référence pour le bouton d'ouverture
-  const menuItemsRef = useRef<Array<HTMLButtonElement | null>>([]); // Référence pour les éléments du menu
+  const { font, setFont } = useFont(); // Accède au contexte de la police actuelle et à la fonction pour la modifier
+  const [isOpen, setIsOpen] = useState(false); // État pour gérer l'ouverture du menu
+  const [focusedIndex, setFocusedIndex] = useState<number | null>(null); // Index de l'option actuellement focusée
+  const dropdownRef = useRef<HTMLDivElement>(null); // Référence pour le container dropdown
+  const buttonRef = useRef<HTMLButtonElement>(null); // Référence pour le bouton d'ouverture du menu
+  const menuItemsRef = useRef<Array<HTMLButtonElement | null>>([]); // Références des boutons de menu
 
+  // Liste des polices disponibles
   const fonts: { label: string; value: FontOption }[] = [
     { label: "Sans Serif", value: "sans-serif" },
     { label: "Serif", value: "serif" },
@@ -23,15 +24,16 @@ const FontSelector = (): JSX.Element => {
   ];
 
   /**
-   * Ouvre ou ferme le menu déroulant.
+   * Ouvre ou ferme le menu déroulant et met à jour l'index focalisé
    */
   const toggleDropdown = () => {
     setIsOpen((prev) => !prev);
-    setFocusedIndex(null); // Réinitialise l'index de focus
+    // Place le focus sur la police actuelle lorsqu'on ouvre le menu
+    setFocusedIndex(fonts.findIndex((f) => f.value === font));
   };
 
   /**
-   * Gestion du clic en dehors du menu pour le fermer uniquement.
+   * Gère la fermeture du menu lorsqu'un clic est effectué à l'extérieur
    */
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -51,9 +53,11 @@ const FontSelector = (): JSX.Element => {
   }, [isOpen]);
 
   /**
-   * Gère la navigation au clavier dans le menu.
-   *
-   * @param {React.KeyboardEvent} event - L'événement clavier à gérer.
+   * Gestion du clavier pour naviguer dans le menu
+   * - Flèche bas : passe à l'élément suivant
+   * - Flèche haut : passe à l'élément précédent
+   * - Entrée/Barre d'espace : sélectionne l'élément actuel
+   * - Échap : ferme le menu
    */
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (!isOpen) return;
@@ -62,47 +66,33 @@ const FontSelector = (): JSX.Element => {
       event.preventDefault();
       setFocusedIndex((prev) =>
         prev === null || prev === fonts.length - 1 ? 0 : prev + 1
-      ); // Passe à l'élément suivant ou revient au début
-    }
-
-    if (event.key === "ArrowUp") {
+      );
+    } else if (event.key === "ArrowUp") {
       event.preventDefault();
       setFocusedIndex((prev) =>
         prev === null || prev === 0 ? fonts.length - 1 : prev - 1
-      ); // Passe à l'élément précédent ou revient à la fin
-    }
-
-    if (event.key === "Enter" || event.key === " ") {
+      );
+    } else if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
       if (focusedIndex !== null) {
         setFont(fonts[focusedIndex].value);
         setIsOpen(false);
       }
-    }
-
-    if (event.key === "Escape") {
-      setIsOpen(false); // Ferme le menu si la touche Échap est pressée
-      buttonRef.current?.focus(); // Reviens au bouton
+    } else if (event.key === "Escape") {
+      setIsOpen(false);
+      buttonRef.current?.focus();
     }
   };
 
   /**
-   * Gère le focus sur les éléments du menu lors de leur apparition.
+   * Positionne le focus sur l'option actuellement sélectionnée ou la première option
+   * lorsque le menu s'ouvre.
    */
   useEffect(() => {
     if (isOpen && focusedIndex !== null && menuItemsRef.current[focusedIndex]) {
       menuItemsRef.current[focusedIndex]?.focus();
     }
   }, [focusedIndex, isOpen]);
-
-  // Ouvre le menu et donne le focus à la première option
-  const handleButtonKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      setIsOpen(true); // Ouvre le menu au clavier avec animation
-      setFocusedIndex(0); // Focalise la première option
-    }
-  };
 
   return (
     <div className="relative" ref={dropdownRef}>
@@ -114,7 +104,6 @@ const FontSelector = (): JSX.Element => {
         aria-expanded={isOpen}
         aria-controls="font-selector-list"
         className="flex items-center gap-2 text-[1.125rem] font-bold text-dark-1 dark:text-light-4 focus:ring-1 focus:ring-accent-purple focus:ring-offset-1 focus:ring-offset-transparent focus:outline-none rounded-2xl px-2"
-        onKeyDown={handleButtonKeyDown}
       >
         <span>
           {fonts.find((f) => f.value === font)?.label || "Sans Serif"}
