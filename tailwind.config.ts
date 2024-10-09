@@ -33,11 +33,11 @@ const config: Config = {
         mono: ["Inconsolata", "monospace"],
       },
       fontSize: {
-        "heading-l": ["64px", "77px"],
-        "heading-m": ["24px", "29px"],
-        "heading-s": ["20px", "24px"],
-        "body-m": ["18px", "24px"],
-        "body-s": ["14px", "17px"],
+        "heading-l": ["4rem", "77px"], // 4rem = 64px
+        "heading-m": ["1.5rem", "29px"], // 1.5rem = 24px
+        "heading-s": ["1.25rem", "24px"], // 1.25 = 20px
+        "body-m": ["1.125rem", "24px"], // 1.125rem = 18px
+        "body-s": ["0.875rem", "17px"], // 0.875rem = 14px
       },
       boxShadow: {
         "light-mode": "0px 8px 16px 0px hsla(0, 0%, 0%, 0.2)",

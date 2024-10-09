@@ -24,16 +24,20 @@ const Meaning: React.FC<Meaning> = ({
   <div className="mb-4">
     {/* Affichage du type de discours */}
     <div className="mt-5 flex items-center gap-4">
-      <h2 className="text-heading-m italic font-bold">{partOfSpeech}</h2>
+      <h2 className="text-[0.938rem] sm:text-heading-m italic font-bold">
+        {partOfSpeech}
+      </h2>
       <div className="mt-[5px] w-full h-[1px] bg-light-2 dark:bg-dark-3" />
     </div>
 
     {/* Affichage des définitions */}
     <div className="mt-5">
-      <h3 className="mb-4 text-heading-s text-light-1">Meaning</h3>
+      <h3 className="mb-4 text-[1rem] sm:text-heading-s text-light-1">
+        Meaning
+      </h3>
       <ul className="pl-10 list-disc marker:text-accent-purple flex flex-col gap-4">
         {definitions.map((def, idx) => (
-          <li key={idx} className="mb-2 pl-2">
+          <li key={idx} className="mb-2 pl-2 text-[0.938rem] sm:text-body-m">
             <p>{def.definition}</p>
             {def.example && (
               <p className="text-gray-500">&quot;{def.example}&quot;</p>

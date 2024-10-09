@@ -23,9 +23,9 @@ const Synonyms: React.FC<SynonymsProps> = ({ synonyms }) => {
   if (!synonyms || synonyms.length === 0) return null;
 
   return (
-    <div className="mt-4 flex gap-4">
-      <h4 className="text-heading-s text-light-1">Synonyms</h4>
-      <ul className="list-none flex flex-wrap gap-2 text-heading-s font-bold">
+    <div className="mt-4 flex gap-4 text-[1rem] sm:text-heading-s">
+      <h4 className="text-light-1">Synonyms</h4>
+      <ul className="list-none flex flex-wrap gap-2 font-bold">
         {synonyms.map((synonym, index) => (
           <li key={index} className="text-accent-purple cursor-pointer">
             <button
@@ -34,6 +34,7 @@ const Synonyms: React.FC<SynonymsProps> = ({ synonyms }) => {
               onClick={() => setSearchTerm(synonym)}
             >
               {synonym}
+              {index < synonyms.length - 1 ? "," : "."}
             </button>
           </li>
         ))}

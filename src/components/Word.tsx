@@ -44,8 +44,8 @@ const Word: React.FC<WordProps> = ({
     <div className="mb-6 self-stretch flex justify-between items-center gap-2">
       {/* Affichage du mot */}
       <div className="self-start flex flex-col">
-        <h1 className="text-heading-l font-semibold">{word}</h1>
-        <div className="flex flex-wrap gap-1 text-heading-m text-accent-purple">
+        <h1 className="text-[2rem] sm:text-heading-l font-semibold">{word}</h1>
+        <div className="flex flex-wrap gap-1 text-body-m sm:text-heading-m  text-accent-purple">
           {phonetics.map((phonetic, index) => (
             <span key={index} className="">
               {phonetic.text}

@@ -23,9 +23,9 @@ const Antonyms: React.FC<AntonymsProps> = ({ antonyms }) => {
   if (!antonyms || antonyms.length === 0) return null;
 
   return (
-    <div className="mt-4 flex gap-4">
-      <h4 className="text-heading-s text-light-1">Antonyms</h4>
-      <ul className="list-none flex flex-wrap gap-2 text-heading-s font-bold">
+    <div className="mt-4 flex gap-4 text-[1rem] sm:text-heading-s">
+      <h4 className="text-light-1">Antonyms</h4>
+      <ul className="list-none flex flex-wrap gap-2 font-bold">
         {antonyms.map((antonym, index) => (
           <li key={index} className="text-accent-purple cursor-pointer">
             <button
@@ -34,6 +34,7 @@ const Antonyms: React.FC<AntonymsProps> = ({ antonyms }) => {
               onClick={() => setSearchTerm(antonym)}
             >
               {antonym}
+              {index < antonyms.length - 1 ? "," : "."}
             </button>
           </li>
         ))}
