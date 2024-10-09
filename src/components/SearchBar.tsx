@@ -50,7 +50,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, initialInput }) => {
             setInput(value);
             if (!value.trim()) {
               setHasError(true);
-            } else if (hasError) {
+              onSearch("");
+            } else {
               setHasError(false);
             }
           }}
